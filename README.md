@@ -1,71 +1,75 @@
-# Eremos
+# Eremos - Mirage Agent
 
 ![Eremos](docs/banner2.png)
 
-**Autonomous swarm agents for early on-chain signal detection**
+**Phantom Liquidity Hunter - Agent Φ (Mirage)**
 
-Eremos is a lightweight framework for deploying modular agents that monitor blockchain activity - tracking wallet clusters, mint patterns, and contract anomalies.
-Designed for devs who want low-noise, early signals embedded into their workflows.
+Mirage is an Eremos swarm agent designed to detect sophisticated phantom liquidity operations on Solana. Unlike traditional wash trade detection that focuses on simple patterns, Mirage identifies complex circular flows, cross-DEX coordination, and temporal clustering that sophisticated actors use to create the illusion of organic trading volume.
 
 ---
 
 <p align="center">
-  <img src="docs/therontphd2.png" alt="Agent Theron" width="155"/><br/>
-  <em>Theron - Agent (000)</em>
+  <img src="docs/therontphd2.png" alt="Agent Mirage" width="155"/><br/>
+  <em>Mirage - Agent Φ (Phantom Liquidity Hunter)</em>
 </p>
 
-**Meet Theron - Agent-000**  
-The first deployed agent in the swarm. Passive. Pattern-sensitive.  
-Modular and extendable by design.
+**Meet Mirage - Agent Φ**  
+The phantom liquidity hunter. Real-time cross-DEX correlation analysis.  
+Exposing sophisticated market manipulation as it happens.
 
 ---
 
-## Features
+## Mirage Detection Features
 
-- **Modular Agents** - Scoped logic for detecting wallet activity, contract spawns, and anomalies  
-- **Signal Emission** - Structured signals for logging, alerting, or downstream use  
-- **Swarm Design** - Each agent operates independently with shared utilities  
-- **Extensible Core** - Plug in watchers, inference layers, or custom triggers  
-- **Minimal Output** - Log only what matters
-- **Launch Wallet Detection** - Agents can trace freshly funded wallets (e.g. from CEXs), track their contract interactions, and flag high-confidence deploys in real time
-- **Ghost Watcher** - Monitors long-dormant wallets that suddenly become active again. Useful for tracing old dev wallets or rug setups.
+- **Circular Flow Analysis** - Tracks fund movements through wallet networks and identifies when funds return to origin within 72-hour windows
+- **Cross-DEX Correlation** - Real-time monitoring of simultaneous trading patterns across Raydium, Orca, and Jupiter  
+- **Temporal Clustering** - Flags coordinated trades occurring within <60 seconds across wallet clusters
+- **Wallet Infrastructure Mapping** - Identifies shared fee payers and common funding sources across supposedly independent wallets
+- **Persistent Memory** - Maintains 72-hour rolling windows and weeks-long wallet relationship tracking
+- **Swarm Intelligence** - Shares wallet cluster data with other Eremos agents for collaborative detection
 
 
 ---
 
-## Example Signal
+## Example Detection
 
-An example signal emitted by an agent detecting a live token deployment:
+Mirage detecting phantom liquidity operation in real-time:
 
 ```ts
-[agent-observer] → fresh funding detected from kraken (wallet: 6Yxk...P2M8) at 04:41:12Z
-[agent-observer] → contract probing detected within 4s (pump.fun interaction traced)
-[agent-observer] → token created at 04:41:17Z (tx: 5gW...pump)
-[agent-observer] → 5 bundle-linked wallets interacted within 8s of deploy
-[agent-observer] → launch confidence spike (0.91) - emitting signal (elapsed: 13s)
+[agent-mirage] → circular flow detected: 100 SOL through wallet A→B→C (Raydium)
+[agent-mirage] → correlation spike: 95 SOL through wallet D→E→F (Orca) +47s
+[agent-mirage] → shared fee payer identified across clusters
+[agent-mirage] → funds returning to origin within 72h window
+[agent-mirage] → phantom liquidity confidence (0.94) - emitting signal
 
 {
-  agent: "Observer",
-  type: "launch_detected",
-  glyph: "Δ",
-  hash: "sig_c7f9a3d2bc",
-  timestamp: "2025-06-12T04:41:25Z",
-  source: "agent-observer",
-  confidence: 0.91
+  agent: "Mirage",
+  type: "phantom_liquidity_detected",
+  glyph: "Φ",
+  hash: "sig_phantom_abc123",
+  timestamp: "2025-01-15T14:30:45Z",
+  confidence: 0.94,
+  details: {
+    circularityScore: 0.87,
+    crossDexCorrelation: 0.92,
+    temporalCluster: "47s",
+    walletClusterSize: 7,
+    estimatedPhantomVolume: "1.2M SOL"
+  }
 }
 ```
 
 ---
 
-## Signal Confidence
+## Detection Methodology
 
-Each emitted signal includes a `confidence` score (0–1) based on behavioral heuristics:
-- CEX-origin funding (e.g. Kraken, Coinbase)
-- Time between funding → deploy
-- Wallet linkage density (bundled activity)
-- Token metadata validation
+Mirage emits HIGH confidence signals when detecting:
+- **Circularity scores >0.8** - Funds returning to origin through complex paths
+- **Cross-DEX correlation >0.9** - Synchronized trading across multiple DEXs  
+- **Temporal clustering <60s** - Coordinated "independent" trades
+- **Shared infrastructure** - Common fee payers across wallet clusters
 
-Confidence is computed via agent-side scoring and logged alongside the signal.
+The agent maintains persistent memory of SPL token account lifecycles and builds real-time correlation matrices to expose sophisticated phantom liquidity operations that traditional tools miss.
 
 ---
 
@@ -95,9 +99,19 @@ npm run dev
 
 ---
 
+## Why Mirage Matters
+
+Current wash trade detection tools are designed for 2021-era simple patterns. Modern phantom liquidity operations use:
+- **Time delays** to break correlation detection
+- **Amount variance** to avoid exact matching  
+- **Cross-DEX coordination** to fragment evidence
+- **Infrastructure sharing** hidden across wallet clusters
+
+Mirage's continuous observation model with persistent memory can detect these evolved patterns in real-time, protecting users from millions in potential losses to sophisticated market manipulation.
+
 ## Key Folders
 
-- `/agents` - Agent templates + logic  
+- `/agents` - Agent templates + logic (including Mirage specifications)
 - `/utils` - Shared signal/logging utilities  
 - `/types` - TypeScript interfaces + definitions  
 - `/scripts` - Bootstrap and dev scripts  
